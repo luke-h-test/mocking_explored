@@ -63,4 +63,43 @@ public class DataLoaderTest
         // assert
         assertEquals(expected, result);
     }
+
+    @Test
+    public void test_whats_the_problem_we_are_trying_to_solve_loosening_the_coupling()
+    {
+        class B
+        {
+            int doSomething(int x, int y){ return x + y;}
+        }
+        class A
+        {
+            B b;
+            
+            A( B b )
+            {
+                this.b = b;
+            }
+            
+            int doSomething(int x, int y, int z)
+            {
+                return b.doSomething(x, y) + z;
+            }
+        }
+        // arrange
+        // A can now run with any instance of B, we've loosened the coupling
+        // But we still have the issue of If B were accessing the file system
+        // to load a file and that file was not there, the test would fail
+        B b = new B();
+        A cut = new A(b);
+        int x = 3;
+        int y = 6;
+        int z = 9;
+        int expected = 18;
+        
+        // act
+        int result = cut.doSomething(x, y, z);
+        
+        // assert
+        assertEquals(expected, result);
+    }
 }
