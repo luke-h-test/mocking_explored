@@ -102,4 +102,56 @@ public class DataLoaderTest
         // assert
         assertEquals(expected, result);
     }
+
+    interface IB
+    {
+        int doSomething(int x, int y);
+    }
+    
+    @Test
+    public void test_whats_the_problem_we_are_trying_to_solve_loosely_coupled_with_interface()
+    {
+        class B implements IB
+        {
+            @Override
+            public int doSomething(int x, int y){ return x + y;}
+        }
+        class X implements IB
+        {
+            @Override
+            public int doSomething(int x, int y){ return x*1 + y*1;}
+        }
+            
+        class A
+        {
+            IB b;
+            
+            A( IB b )
+            {
+                this.b = b;
+            }
+            
+            int doSomething(int x, int y, int z)
+            {
+                return b.doSomething(x, y) + z;
+            }
+        }
+        // arrange
+        // A can now run with any instance that implements the IB interface
+        // So we have completely decoupled A from B
+        // We are now free to provide to A a substitute that does not for example
+        // perform an IO
+        IB child = new X();
+        A cut = new A(child);
+        int x = 3;
+        int y = 6;
+        int z = 9;
+        int expected = 18;
+        
+        // act
+        int result = cut.doSomething(x, y, z);
+        
+        // assert
+        assertEquals(expected, result);
+    }
 }
