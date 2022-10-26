@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class TextFileLoader
 {
-    public  Iterable<String>  loadFile(  String fname )
+    public  Iterable<String>  loadFile(  String fname, ICollectionLoader func )
     {
         FileReader fr = null;
         ArrayList<String> lines = new ArrayList<>();
@@ -32,8 +32,9 @@ public class TextFileLoader
             String line;
             while((line = br.readLine()) != null)
             {
-                //process the line
-                lines.add(line);
+                // process the line
+                // we use a lambda here to do the heavy lifting
+                func.addElement( lines, line);
             }       
         } catch (IOException ex)
         {
@@ -51,5 +52,4 @@ public class TextFileLoader
         }
         return lines;
     }
-    
 }
