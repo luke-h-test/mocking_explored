@@ -5,8 +5,11 @@
  */
 package com.celestial.mocking_explored;
 
+import com.celestial.mocking_explored.DataLoaderTest.IB;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 
 /**
@@ -147,6 +150,45 @@ public class DataLoaderTest
         int y = 6;
         int z = 9;
         int expected = 18;
+        
+        // act
+        int result = cut.doSomething(x, y, z);
+        
+        // assert
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void test_whats_the_problem_we_are_trying_to_solve_introducing_mocking()
+    {
+        class A
+        {
+            IB b;
+            
+            A( IB b )
+            {
+                this.b = b;
+            }
+            
+            int doSomething(int x, int y, int z)
+            {
+                return b.doSomething(x, y) + z;
+            }
+        }
+        // arrange
+        // A can now run with any instance that implements the IB interface
+        // So we have completely decoupled A from B
+        // We are now free to provide to A a substitute that does not for example
+        // perform an IO
+        IB child = mock(IB.class);  // create the mock
+        A cut = new A(child);
+        int x = 3;
+        int y = 6;
+        int z = 9;
+        int expected = 18;
+        
+        // setup the expectations
+        when(child.doSomething(3, 6)).thenReturn(9);
         
         // act
         int result = cut.doSomething(x, y, z);

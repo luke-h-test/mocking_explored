@@ -27,11 +27,6 @@
             <version>4.8.1</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <artifactId>junit</artifactId>
-            <groupId>junit</groupId>
-            <version>4.11</version>
-        </dependency>
     </dependencies>
     <build>  
         <finalName>mocking_explored</finalName>
