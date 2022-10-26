@@ -48,6 +48,9 @@ public class DataLoaderTest
             }
         }
         // arrange
+        // In order to run this test A must create an instance of B
+        // this is tightly coupled code.  If B were accessing the file system
+        // to load a file and that file was not there, the test would fail
         A cut = new A();
         int x = 3;
         int y = 6;
