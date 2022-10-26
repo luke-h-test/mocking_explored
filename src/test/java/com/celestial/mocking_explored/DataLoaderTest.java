@@ -31,4 +31,33 @@ public class DataLoaderTest
         assertEquals( expected, result );
     }
     
+    @Test
+    public void test_whats_the_problem_we_are_trying_to_solve()
+    {
+        class B
+        {
+            int doSomething(int x, int y){ return x + y;}
+        }
+        class A
+        {
+            B b = new B();
+            
+            int doSomething(int x, int y, int z)
+            {
+                return b.doSomething(x, y) + z;
+            }
+        }
+        // arrange
+        A cut = new A();
+        int x = 3;
+        int y = 6;
+        int z = 9;
+        int expected = 18;
+        
+        // act
+        int result = cut.doSomething(x, y, z);
+        
+        // assert
+        assertEquals(expected, result);
+    }
 }
