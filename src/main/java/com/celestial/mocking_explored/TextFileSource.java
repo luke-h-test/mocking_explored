@@ -17,9 +17,10 @@ import java.util.logging.Logger;
  *
  * @author selvy
  */
-public class TextFileLoader
+public class TextFileSource implements IDataSource
 {
-    public  Iterable<String>  loadFile(  String fname, ICollectionLoader func )
+    @Override
+    public  Iterable<String>  loadData(  String fname, ICollectionLoader func )
     {
         FileReader fr = null;
         ArrayList<String> lines = new ArrayList<>();
