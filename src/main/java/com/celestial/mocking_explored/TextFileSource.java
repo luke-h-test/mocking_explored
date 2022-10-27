@@ -20,6 +20,16 @@ import java.util.logging.Logger;
 public class TextFileSource implements IDataSource
 {
     @Override
+    public  Iterable<String>  loadData(  String fname ) {
+        // We create a lambda expression to do the work in the TextFileLoader
+        ICollectionLoader<ArrayList<String>> functor = (c, l) -> {
+            c.add(l);
+            return c;
+        };
+        return loadData(fname, functor);
+    }
+
+    @Override
     public  Iterable<String>  loadData(  String fname, ICollectionLoader func )
     {
         FileReader fr = null;

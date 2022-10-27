@@ -256,7 +256,7 @@ public class DataLoaderTest
         items.add("line 2");
         items.add("line 3");
         
-        when(mock.loadData(any(), any())).thenReturn(items);
+        when(mock.loadData(any())).thenReturn(items);
         
         // Look carefully at how DataLoader.lodData() works, line 
         DataLoader cut = new DataLoader(mock);
