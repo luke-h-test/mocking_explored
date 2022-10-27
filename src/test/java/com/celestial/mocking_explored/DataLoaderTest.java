@@ -6,8 +6,11 @@
 package com.celestial.mocking_explored;
 
 import com.celestial.mocking_explored.DataLoaderTest.IB;
+import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -195,5 +198,52 @@ public class DataLoaderTest
         
         // assert
         assertEquals(expected, result);
+    }
+    
+    @Test
+    public  void  test_how_does_mockito_work()
+    {
+       // Standard use of ArrayList is as follows
+       ArrayList<Integer> ints = new ArrayList<>(10);
+       ints.add(1);
+       ints.add(2);
+       ints.add(3);
+       
+       assertEquals(3, ints.size(), "This is should work");
+       
+       // Now mocking the ArrayList
+       
+       ArrayList<Integer> m_ints = mock(ArrayList.class);
+       when(m_ints.size()).thenReturn(4);
+       
+       // It doesn't matter how many times you call m_ints.add(), 
+       // m_ints.size() will always return 4
+       
+       // we've added nothing yet
+       assertEquals( 4, m_ints.size(), "This si crazy, it shoudn't work but it does");
+
+       // Let's add some numbers
+        m_ints.add(3);
+        m_ints.add(7);
+        assertEquals(2, m_ints.size(), "This should fail");
+
+    }
+
+    @Test
+    public  void    test_fun_with_mocks()
+    {
+        // mocks create scaffold code, no methods, just place holders
+        // if you call a method that you haven't specified a when() on it returns the default value based on the method's signature
+        // So let's try it again to see how this works - ArrayList.isEmpty() returns true if the collection has no elements
+        // We've not added an expectation for isEmpty() so it default to false
+
+        // Now mocking the ArrayList
+        ArrayList<Integer> m_ints = mock(ArrayList.class);
+        when(m_ints.size()).thenReturn(4);
+
+        // We've added no items so isEmpty() should return true
+        boolean result = m_ints.isEmpty();
+        assertEquals( true, result, "The collection is empty");
+
     }
 }
