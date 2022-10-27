@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -244,6 +244,28 @@ public class DataLoaderTest
         // We've added no items so isEmpty() should return true
         boolean result = m_ints.isEmpty();
         assertEquals( true, result, "The collection is empty");
-
     }
+    
+    @Test
+    public void test_count_chars_in_DataSource_with_mocking()
+    {
+        // arrange
+        TextFileSource mock = mock(TextFileSource.class);
+        ArrayList<String> items = new ArrayList<>();
+        items.add("line 1");
+        items.add("line 2");
+        items.add("line 3");
+        
+        when(mock.loadData(any(), any())).thenReturn(items);
+        
+        // Look carefully at how DataLoader.lodData() works, line 
+        DataLoader cut = new DataLoader(mock);
+        long expected = 18;
+        
+        // act
+        long result = cut.loadData("");
+        
+        // assert
+        assertEquals( expected, result );
+    }    
 }
