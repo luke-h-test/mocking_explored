@@ -22,13 +22,7 @@ public class DataLoader
     
     public  long    loadData(String fname)
     {
-        // We create a lambda expression to do the work in the TextFileLoader
-        ICollectionLoader<ArrayList<String>> functor = (c, l) -> {
-            c.add(l);
-            return c;
-        };
-
-        var data = dataSource.loadData(fname, functor);
+        var data = dataSource.loadData(fname);
         long count = 0;
         for( var datum : data )
         {

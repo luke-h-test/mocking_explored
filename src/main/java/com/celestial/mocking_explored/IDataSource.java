@@ -11,5 +11,6 @@ package com.celestial.mocking_explored;
  */
 public interface IDataSource
 {
-    public  Iterable<String>  loadData(  String fname, ICollectionLoader func );    
+    public  Iterable<String>  loadData(  String fname );
+    public  Iterable<String>  loadData(  String fname, ICollectionLoader func );
 }
