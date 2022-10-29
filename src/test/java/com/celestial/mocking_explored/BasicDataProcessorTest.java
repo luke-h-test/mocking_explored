@@ -5,7 +5,6 @@
  */
 package com.celestial.mocking_explored;
 
-import com.celestial.mocking_explored.DataLoaderTest.IB;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
@@ -19,15 +18,15 @@ import static org.mockito.Mockito.when;
  *
  * @author selvy
  */
-public class DataLoaderTest
+public class BasicDataProcessorTest
 {
     @Test
-    public void test_count_chars_in_DataSource_no_mocking()
+    public void test_count_chars_in_BasicDataProcessor_no_mocking()
     {
         // arrange
         TextFileSource tfl = new TextFileSource();        
         String fname = "C:\\tmp\\KeyboardHandler.java.txt";
-        DataLoader dl = new DataLoader(tfl);
+        BasicDataProcessor dl = new BasicDataProcessor(tfl);
         long expected = 1383;
         
         // act
@@ -247,7 +246,7 @@ public class DataLoaderTest
     }
     
     @Test
-    public void test_count_chars_in_DataSource_with_mocking()
+    public void test_count_chars_in_BasicDataProcessor_with_mocking()
     {
         // arrange
         TextFileSource mock = mock(TextFileSource.class);
@@ -259,7 +258,7 @@ public class DataLoaderTest
         when(mock.loadData(any())).thenReturn(items);
         
         // Look carefully at how DataLoader.lodData() works, line 
-        DataLoader cut = new DataLoader(mock);
+        BasicDataProcessor cut = new BasicDataProcessor(mock);
         long expected = 18;
         
         // act

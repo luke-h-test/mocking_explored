@@ -11,11 +11,11 @@ import java.util.ArrayList;
  *
  * @author selvy
  */
-public class DataLoader
+public class BasicDataProcessor
 {
     private final IDataSource dataSource;
     
-    public  DataLoader( IDataSource ds )
+    public BasicDataProcessor(IDataSource ds )
     {
         dataSource = ds;
     }

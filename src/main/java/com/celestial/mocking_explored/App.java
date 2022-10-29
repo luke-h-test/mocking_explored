@@ -33,7 +33,7 @@ public class App
         
         // Example using the DataLoader
         
-        DataLoader dl = new DataLoader(tfl);
+        BasicDataProcessor dl = new BasicDataProcessor(tfl);
         long noOfChars = dl.loadData(fname);
         
         System.out.println( "No of characters in the file are: " + noOfChars );
