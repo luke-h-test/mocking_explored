@@ -11,18 +11,18 @@ import java.util.ArrayList;
  *
  * @author selvy
  */
-public class BasicDataProcessor
+public class BasicDataProcessor<T>
 {
-    private final IDataSource dataSource;
+    private final IDataSource<T> dataSource;
     
-    public BasicDataProcessor(IDataSource ds )
+    public BasicDataProcessor(IDataSource<T> ds )
     {
         dataSource = ds;
     }
     
-    public  long    loadData(String fname)
+    public  <T> long    loadData(String fname)
     {
-        var data = dataSource.loadData(fname);
+        Iterable<String> data = dataSource.loadData(fname);
         long count = 0;
         for( var datum : data )
         {

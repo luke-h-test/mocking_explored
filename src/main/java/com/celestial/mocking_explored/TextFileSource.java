@@ -17,23 +17,24 @@ import java.util.logging.Logger;
  *
  * @author selvy
  */
-public class TextFileSource implements IDataSource
+public class TextFileSource<T> implements IDataSource<T>
 {
     @Override
-    public  Iterable<String>  loadData(  String fname ) {
+    public  <T> T loadData(String fname ) {
+        ArrayList<String> lines = new ArrayList<String>();
+
         // We create a lambda expression to do the work in the TextFileLoader
         ICollectionLoader<ArrayList<String>> functor = (c, l) -> {
             c.add(l);
             return c;
         };
-        return loadData(fname, functor);
+        return (T) loadData(fname, lines, functor);
     }
 
     @Override
-    public  Iterable<String>  loadData(  String fname, ICollectionLoader func )
+    public  <T> T  loadData( String fname, T lines, ICollectionLoader<T> func )
     {
         FileReader fr = null;
-        ArrayList<String> lines = new ArrayList<>();
         try
         {
             String fileName = fname;

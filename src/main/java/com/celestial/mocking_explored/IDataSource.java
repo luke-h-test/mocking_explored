@@ -5,12 +5,14 @@
  */
 package com.celestial.mocking_explored;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author selvy
  */
-public interface IDataSource
+public interface IDataSource<T>
 {
-    public  Iterable<String>  loadData(  String fname );
-    public  Iterable<String>  loadData(  String fname, ICollectionLoader func );
+    public  <T> T loadData(String fname );
+    public  <T> T loadData(  String fname, T line, ICollectionLoader<T> func );
 }

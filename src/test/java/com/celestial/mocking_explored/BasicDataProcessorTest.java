@@ -24,7 +24,7 @@ public class BasicDataProcessorTest
     public void test_count_chars_in_BasicDataProcessor_no_mocking()
     {
         // arrange
-        TextFileSource tfl = new TextFileSource();        
+        TextFileSource tfl = new TextFileSource();
         String fname = "C:\\tmp\\KeyboardHandler.java.txt";
         BasicDataProcessor dl = new BasicDataProcessor(tfl);
         long expected = 1383;
@@ -254,10 +254,10 @@ public class BasicDataProcessorTest
         items.add("line 1");
         items.add("line 2");
         items.add("line 3");
-        
+
         when(mock.loadData(any())).thenReturn(items);
-        
-        // Look carefully at how DataLoader.lodData() works, line 
+
+        // Look carefully at how DataLoader.lodData() works, line
         BasicDataProcessor cut = new BasicDataProcessor(mock);
         long expected = 18;
         
