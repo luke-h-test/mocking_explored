@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Stack;
 
 
 class TextFileSourceTest
@@ -58,6 +59,27 @@ class TextFileSourceTest
         PriorityQueue<String> data = new PriorityQueue<>();
 
         PriorityQueue<String> lines = tfl.loadData(fname, data, functor);
+
+        lines.forEach((element) ->{
+            System.out.println(">> " + element);
+        });
+    }
+
+    @Test
+    void howto_use_LoadData_method_with_3_params_using_Stack()
+    {
+        TextFileSource<ArrayList<String>> tfl = new TextFileSource<>();
+
+        // We create a lambda expression to do the work in the TextFileLoader
+        ICollectionLoader<Stack<String>> functor = (c, l) -> {
+            c.push(l);
+            return c;
+        };
+
+        String fname = "C:\\tmp\\KeyboardHandler.java.txt";
+        Stack<String> data = new Stack<>();
+
+        Stack<String> lines = tfl.loadData(fname, data, functor);
 
         lines.forEach((element) ->{
             System.out.println(">> " + element);
