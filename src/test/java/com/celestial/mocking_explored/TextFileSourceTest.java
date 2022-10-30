@@ -3,6 +3,8 @@ package com.celestial.mocking_explored;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 
 class TextFileSourceTest
@@ -35,6 +37,27 @@ class TextFileSourceTest
         ArrayList<String> data = new ArrayList<>();
 
         ArrayList<String> lines = tfl.loadData(fname, data, functor);
+
+        lines.forEach((element) ->{
+            System.out.println(">> " + element);
+        });
+    }
+
+    @Test
+    void howto_use_LoadData_method_with_3_params_using_queue()
+    {
+        TextFileSource<ArrayList<String>> tfl = new TextFileSource<>();
+
+        // We create a lambda expression to do the work in the TextFileLoader
+        ICollectionLoader<PriorityQueue<String>> functor = (c, l) -> {
+            c.add(l);
+            return c;
+        };
+
+        String fname = "C:\\tmp\\KeyboardHandler.java.txt";
+        PriorityQueue<String> data = new PriorityQueue<>();
+
+        PriorityQueue<String> lines = tfl.loadData(fname, data, functor);
 
         lines.forEach((element) ->{
             System.out.println(">> " + element);
