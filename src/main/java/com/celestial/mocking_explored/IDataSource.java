@@ -5,8 +5,6 @@
  */
 package com.celestial.mocking_explored;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author selvy

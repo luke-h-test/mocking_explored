@@ -5,11 +5,10 @@
  */
 package com.celestial.mocking_explored;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author selvy
+ * @param <T>
  */
 public class BasicDataProcessor<T>
 {

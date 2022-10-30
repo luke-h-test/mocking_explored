@@ -16,12 +16,13 @@ import java.util.logging.Logger;
 /**
  *
  * @author selvy
+ * @param <T>
  */
 public class TextFileSource<T> implements IDataSource<T>
 {
     @Override
     public  <T> T loadData(String fname ) {
-        ArrayList<String> lines = new ArrayList<String>();
+        ArrayList<String> lines = new ArrayList<>();
 
         // We create a lambda expression to do the work in the TextFileLoader
         ICollectionLoader<ArrayList<String>> functor = (c, l) -> {
